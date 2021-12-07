@@ -19,7 +19,6 @@ export class ClientesListaComponent implements OnInit {
   }
 
   private listar(){
-   this.lista = this.clienteService.listar();
+   this.clienteService.listar().subscribe((clientes)=>console.log(clientes));
   }
-
 }

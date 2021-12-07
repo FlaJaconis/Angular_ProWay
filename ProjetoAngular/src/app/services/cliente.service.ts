@@ -1,5 +1,7 @@
 import { Cliente } from './../model/Cliente';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,18 +9,21 @@ import { Injectable } from '@angular/core';
 
 export class ClienteService {
   private lista: Cliente[];
+  private url:string;
 
-  constructor() {
-    this.lista = [];
+  constructor(private httpClient:HttpClient) {
+    this.url = 'localhost:8090/api/cliente';
    }
 
   salvar(cliente:Cliente):void{
-    console.log("salvar do service: ", cliente)
-    this.lista.push(cliente);
+
+    //this.lista.push(cliente);
 
   }
 
-  listar():Cliente[]{
-    return this.lista;
+  listar():Observable<Cliente[]> {
+    return this.httpClient.get<Cliente[]>(this.url);// precisa colocar o generics <> porque retorna um Observable( que observa a respota) por padrão
   }
 }
+
+  
