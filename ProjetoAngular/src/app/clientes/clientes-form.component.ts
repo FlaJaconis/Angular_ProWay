@@ -1,3 +1,4 @@
+import { Cliente } from './../model/Cliente';
 import { ClienteService } from './../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,31 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clientes-form.component.css']
 })
 export class ClientesFormComponent implements OnInit {
-  id:number = 0;
-  nome:string = "";
-  sobrenome:string = "";
+  cliente = {} as Cliente;
 
-  constructor(private clienteService: ClienteService) {
+ constructor(private clienteService: ClienteService) {
 
   }
 
   ngOnInit(): void {
   }
   salvar(){
-    let cliente = {
-      "id": this.id ,
-      "nome": this.nome,
-      "sobrenome": this.sobrenome,
-    };
-    console.log(cliente);
-    this.clienteService.salvar(cliente);
+    this.clienteService.salvar(this.cliente);
     this.limpar();
-  }
+    };
 
   private limpar(){
-    this.id=0;
-    this.nome="";
-    this.sobrenome="";
+    this.cliente = {} as Cliente;
   }
 
 }
